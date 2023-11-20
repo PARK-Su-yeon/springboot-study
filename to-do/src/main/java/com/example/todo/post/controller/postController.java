@@ -1,9 +1,8 @@
 package com.example.todo.post.controller;
 
-
-
 import com.example.todo.post.dto.PostRequestDto;
 import com.example.todo.post.service.PostService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -23,7 +22,7 @@ public class postController {
 
 
     @PostMapping("/posts")
-    public ResponseEntity<?> posting(@RequestBody PostRequestDto dto) {
+    public ResponseEntity<?> posting(@RequestBody @Valid PostRequestDto dto) {
         return ResponseEntity.ok(postservice.createPost(dto));
 
     }
@@ -41,7 +40,7 @@ public class postController {
     }
 
     @PostMapping("/posts/{id}")
-    public ResponseEntity<?> updatePost(@PathVariable Long id,@RequestBody PostRequestDto dto) {
+    public ResponseEntity<?> updatePost(@PathVariable Long id,@RequestBody @Valid PostRequestDto dto) {
         return ResponseEntity.ok( postservice.update(dto,id));
 
     }
